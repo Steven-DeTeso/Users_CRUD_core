@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Read All</title>
+</head>
+<body>
+    <div class="container">
+        <h1>All Users</h1>
+        <table class="table">
+            <th>
+                <tr>
+                    <td>Id</td>
+                    <td>Full Name</td>
+                    <td>Email</td>
+                    <td>Created At</td>
+                    <td>Actions</td>
+                </tr>
+            </th>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <!-- user.id is 'dot notation' and can be used to target the rows of data coming over from database  -->
+                    <td>{{ user.id }}</td> 
+                    <td>{{ user.first_name}} {{ user.last_name}}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td><a href="/user/show/{{user.id}}">Show</a> | <a href="/user/{{user.id}}">Edit</a> | <a href="/user/destroy/{{user.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- redirects to the listener in server.py, that listener route returns a render template for the create.html page -->
+        <a href="/home/create"> Add a new User</a>
+    </div>
+</body>
+</html>
