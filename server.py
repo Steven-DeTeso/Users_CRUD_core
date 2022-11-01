@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request, redirect, session # type: ignore
 from users import User
 app = Flask(__name__)
@@ -22,13 +23,15 @@ def create():
 # - we NEVER render on a 'POST' so we redirect home which again calls the get_all(). 
 @app.route('/home/show', methods=['POST'])
 def r_show():
+    if not User.validate_user(request.form):
+        return redirect('/home/create')
     print(request.form)
     data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email']
     }
-    session['id'] = request.form['id']
+    # session['id'] = request.form['id']
     User.save(request.form)
     return redirect('/home')
 

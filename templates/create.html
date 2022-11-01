@@ -14,19 +14,26 @@
         <form action="/home/show" method="POST"> 
             <div>
                 <!-- all these for="" values should all line up with database column names -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <label for="first_name">First Name:</label> 
                 <br>
-                <input type="text" name="first_name" placeholder="first_name">
+                <input type="text" name="first_name" placeholder="First name...">
             </div>
             <div>
                 <label for="last_name">Last Name:</label>
                 <br>
-                <input type="text" name="last_name" placeholder="last_name">
+                <input type="text" name="last_name" placeholder="Last name...">
             </div>
             <div>
                 <label for="email">Email:</label>
                 <br>
-                <input type="email" name="email" placeholder="email">
+                <input type="email" name="email" placeholder="Email...">
             </div>
             <input type="submit" value="create">
         </form>
